@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const endpointCorsOptions = cors({
     origin: 'https://safe-surf-ruby.vercel.app',
-    methods: ['POST', 'GET'],
+    methods: ['POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true
 });
