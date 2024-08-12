@@ -38,11 +38,11 @@ const Search = () => {
         setError(null);
 
         try {
-            const response = await axios.post('http://localhost:3000/api/scan', { url });
+            const response = await axios.post('https://safe-surf-mkiu.vercel.app/api/scan', { url });
             console.log('Scan response:', response.data);
             const scanId = response.data.uuid;
             await new Promise(resolve => setTimeout(resolve, 10000));
-            const scanResult = await axios.get(`http://localhost:3000/api/result/${scanId}`);
+            const scanResult = await axios.get(`https://safe-surf-mkiu.vercel.app/api/result/${scanId}`);
             console.log('Result response:', scanResult.data);
             setIsLoading(false);
             navigate('/result', { state: { result: scanResult.data } });
