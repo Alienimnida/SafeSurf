@@ -5,9 +5,28 @@ require('dotenv').config();
 
 const app = express();
 const port = 3000;
-
-app.use(cors());
+const corsOptions = {
+    origin: 'https://safe-surf-ruby.vercel.app',
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+const endpointCorsOptions = cors({
+    origin: 'https://safe-surf-ruby.vercel.app',
+    methods: ['POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true
+});
+app.options('/', endpointCorsOptions);
+app.options('/api/scan', endpointCorsOptions);
+app.options('/api/result/:scanId', endpointCorsOptions);
+
+app.get('/', async (req, res) => {
+    res.send("Hello world");
+});
+
 
 app.post('/api/scan', async (req, res) => {
     try {
